@@ -71,11 +71,3 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Things to not view in PR
-Assets/*.*
-.vscode
-.mat
-*.meta
-.asset
-.unity
-.prefab
