@@ -3132,6 +3132,7 @@ GameObject:
   - component: {fileID: 956653784}
   - component: {fileID: 956653783}
   - component: {fileID: 956653782}
+  - component: {fileID: 956653787}
   - component: {fileID: 956653786}
   m_Layer: 5
   m_Name: Game Menu
@@ -3139,7 +3140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &956653782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3213,7 +3214,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956653778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.292}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0007362975, y: 0.0009625, z: 0.001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3225,7 +3226,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.01}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1302.7505, y: 818.5394}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &956653786
@@ -3240,6 +3241,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6741601ec9b3bb745bbf714fb7e2540b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &956653787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956653778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e166314d3cc315f42aa06c9e8adb245a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 956653778}
+  menuAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Menu
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 20c3e222-67b9-4bee-849b-1324e897645f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6784619716207353625, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  head: {fileID: 875959594}
+  spawnDistance: 2
 --- !u!1 &1004326388
 GameObject:
   m_ObjectHideFlags: 0
