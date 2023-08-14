@@ -11,6 +11,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ufficio.unity
     guid: b1ca0fe63e9347340bffb94a1ba1f210
+  - enabled: 1
+    path: Assets/Scenes/Eden.unity
+    guid: 634922aca28702e49a0ee7d165cd2209
+  - enabled: 1
+    path: Assets/Scenes/Magazzino.unity
+    guid: e6508d027d63ae14499e540851d000ce
+  - enabled: 1
+    path: Assets/Scenes/Ufficio Postale.unity
+    guid: 99702ac8b3adf484ebc4f9d203db47f7
+  - enabled: 1
+    path: Assets/Scenes/Sicurezza.unity
+    guid: 915bf96fe3f5a534f8933dda8edeca7b
+  - enabled: 1
+    path: Assets/Scenes/Ampliamento.unity
+    guid: 726d906cf67969b499069c0dbfbdafff
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: feaf3f59a16ec45418ea274f2b17b217,
       type: 2}
