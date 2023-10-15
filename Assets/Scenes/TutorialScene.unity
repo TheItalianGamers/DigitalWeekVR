@@ -10374,7 +10374,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1677961158}
   - component: {fileID: 1677961159}
-  - component: {fileID: 1677961160}
   m_Layer: 0
   m_Name: WebSocketServer
   m_TagString: Untagged
@@ -10407,18 +10406,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbe3e354baa21224babd4ee36b671bb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1677961160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1677961155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6741601ec9b3bb745bbf714fb7e2540b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1685118020
@@ -11973,7 +11960,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30816
+  m_Name: pb_Mesh30392
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

@@ -39,6 +39,7 @@ public class MyWebSocketBehavior : WebSocketBehavior {
             }
 
             case "scene": {
+                WebSocketManager.GetSceneChangerInstance().prova(messageObject.Value);
                 break;
             }
 
@@ -55,8 +56,16 @@ public class MyWebSocketBehavior : WebSocketBehavior {
 public class WebSocketManager : MonoBehaviour
 {
     private WebSocketServer server;
+    private static SceneChanger sceneChangerInstance;
+    
+    public static SceneChanger GetSceneChangerInstance() {
+        return sceneChangerInstance;
+    }
 
     void Start() {
+
+        sceneChangerInstance = gameObject.AddComponent<SceneChanger>();
+
         server = new WebSocketServer(8085);
         server.AddWebSocketService<MyWebSocketBehavior>("/service", s => {
             s.OriginValidator = val => {return true;};
@@ -74,6 +83,5 @@ public class WebSocketManager : MonoBehaviour
         server.Stop();
         Debug.Log("Server aborted!");
     }
-
 
 }
