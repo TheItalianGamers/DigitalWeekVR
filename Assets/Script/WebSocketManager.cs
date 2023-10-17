@@ -62,6 +62,7 @@ public class MyWebSocketBehavior : WebSocketBehavior {
 public class WebSocketManager : MonoBehaviour
 {
     private WebSocketServer server;
+    private const string gameObjectTag = "WS";
     private readonly ConcurrentQueue<Action> _actions = new ConcurrentQueue<Action>();
 
     void Start() {
@@ -72,11 +73,21 @@ public class WebSocketManager : MonoBehaviour
             s.OnSceneEvent += MyWebSocketBehavior_OnSceneEvent; 
         });
 
-        server.Start();
+    // When I comeback to the TutorialScene there are two WebSocketManager components
+    // So I have to eliminate one, because if I don't do it I get a SocketIO Exception
+    // because more than one component are trying to access to the 8085 port
+        GameObject[] webSocketObjects = GameObject.FindGameObjectsWithTag(gameObjectTag);
 
-        if(server.IsListening) {
-            Debug.Log("Server running on port " + server.Port); 
-            DontDestroyOnLoad(this.gameObject);
+        if(webSocketObjects.Length == 2 && SceneManager.GetActiveScene().name == "TutorialScene") {
+            Destroy(this.gameObject);
+        }
+        else {
+            server.Start();
+
+            if(server.IsListening) {
+                Debug.Log("Server running on port " + server.Port); 
+                DontDestroyOnLoad(this.gameObject);
+            }
         }
 
     }
