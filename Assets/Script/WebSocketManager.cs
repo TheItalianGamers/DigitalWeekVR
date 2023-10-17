@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 
+using System;
+using System.Collections.Concurrent;
+
 [System.Serializable]
 public class WebSocketMessage {
 
@@ -23,6 +26,9 @@ public class WebSocketMessage {
 
 public class MyWebSocketBehavior : WebSocketBehavior {
 
+    public delegate void SceneDelegate(string sceneName);
+    public event SceneDelegate OnSceneEvent;
+
     protected override void OnMessage(MessageEventArgs e) {
 
         WebSocketMessage messageObject = JsonUtility.FromJson<WebSocketMessage>(e.Data);
@@ -39,7 +45,7 @@ public class MyWebSocketBehavior : WebSocketBehavior {
             }
 
             case "scene": {
-                WebSocketManager.GetSceneChangerInstance().prova(messageObject.Value);
+                OnSceneEvent?.Invoke(messageObject.Value);
                 break;
             }
 
@@ -56,32 +62,49 @@ public class MyWebSocketBehavior : WebSocketBehavior {
 public class WebSocketManager : MonoBehaviour
 {
     private WebSocketServer server;
-    private static SceneChanger sceneChangerInstance;
-    
-    public static SceneChanger GetSceneChangerInstance() {
-        return sceneChangerInstance;
-    }
+    private readonly ConcurrentQueue<Action> _actions = new ConcurrentQueue<Action>();
 
     void Start() {
-
-        sceneChangerInstance = gameObject.AddComponent<SceneChanger>();
 
         server = new WebSocketServer(8085);
         server.AddWebSocketService<MyWebSocketBehavior>("/service", s => {
             s.OriginValidator = val => {return true;};
+            s.OnSceneEvent += MyWebSocketBehavior_OnSceneEvent; 
         });
 
         server.Start();
 
         if(server.IsListening) {
             Debug.Log("Server running on port " + server.Port); 
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+    }
+
+    void Update() {
+
+        // Work the dispatched actions on the Unity main thread
+        while(_actions.Count > 0) {
+
+            if(_actions.TryDequeue(out var action)) {
+                action?.Invoke();
+            }
+
         }
 
     }
 
     void OnDestroy() {
         server.Stop();
-        Debug.Log("Server aborted!");
+    }
+
+    private void MyWebSocketBehavior_OnSceneEvent(string sceneName) {
+        // Dispatch into the Unity main thread's next Update routine
+        _actions.Enqueue( () => {
+            if(sceneName != SceneManager.GetActiveScene().name)
+                SceneManager.LoadScene(sceneName);
+        });
+
     }
 
 }
