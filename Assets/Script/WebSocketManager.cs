@@ -33,6 +33,11 @@ public class MyWebSocketBehavior : WebSocketBehavior
     public delegate void SceneDelegate(string sceneName);
     public event SceneDelegate OnSceneEvent;
 
+    protected override void OnOpen()
+    {
+        WebSocketManager.Instance.OnMessageSend += WebSocketManager_OnMessageSend;
+    }
+
     protected override void OnMessage(MessageEventArgs e)
     {
 
@@ -65,6 +70,11 @@ public class MyWebSocketBehavior : WebSocketBehavior
 
     }
 
+    private void WebSocketManager_OnMessageSend(string jsonMessage)
+    {
+        Send(jsonMessage);
+    }
+
 }
 
 
@@ -72,6 +82,9 @@ public class WebSocketManager : MonoBehaviour
 {
     private WebSocketServer server;
     private readonly ConcurrentQueue<Action> _actions = new ConcurrentQueue<Action>();
+
+    public delegate void MessageSendDelegate(string jsonMessage);
+    public event MessageSendDelegate OnMessageSend;
 
     public static WebSocketManager Instance;
 
@@ -134,6 +147,8 @@ public class WebSocketManager : MonoBehaviour
         {
             if (sceneName != SceneManager.GetActiveScene().name)
                 SceneManager.LoadScene(sceneName);
+            else
+                OnMessageSend?.Invoke(WebSocketMessage.CreateJson("message", $"The user is still in the {sceneName} !"));
         });
 
     }
