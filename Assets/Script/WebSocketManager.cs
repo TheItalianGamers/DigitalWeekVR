@@ -67,7 +67,6 @@ public class MyWebSocketBehavior : WebSocketBehavior
         }
 
         Send(WebSocketMessage.CreateJson("message", "Greetings from the server!!!"));
-
     }
 
     private void WebSocketManager_OnMessageSend(string jsonMessage)
@@ -137,6 +136,7 @@ public class WebSocketManager : MonoBehaviour
 
     void OnDestroy()
     {
+        OnMessageSend?.Invoke(WebSocketMessage.CreateJson("action", "unity-exit"));
         server.Stop();
     }
 
