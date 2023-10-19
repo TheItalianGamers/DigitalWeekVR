@@ -7,6 +7,18 @@ using WebSocketSharp.Server;
 using System;
 using System.Collections.Concurrent;
 
+// public enum WebSocketEvent {
+//     // Receiving Events
+//     OnChangeScene = "change-scene",
+//     OnSetDifficultyLevel = "set-difficulty-level",
+
+//     // Sending Events
+//     OnUnityExited = "unity-exited"
+
+//     // Sending/Receiving Events
+//     OnMessage = "message",
+// }
+
 [System.Serializable]
 public class WebSocketMessage
 {
@@ -52,12 +64,13 @@ public class MyWebSocketBehavior : WebSocketBehavior
                     break;
                 }
 
-            case "action":
+            case "set-difficulty-level":
                 {
+                    Debug.Log("Now I have to set the " + messageObject.Value + " mode!");
                     break;
                 }
 
-            case "scene":
+            case "change-scene":
                 {
                     OnSceneEvent?.Invoke(messageObject.Value);
                     break;
@@ -136,7 +149,7 @@ public class WebSocketManager : MonoBehaviour
 
     void OnDestroy()
     {
-        OnMessageSend?.Invoke(WebSocketMessage.CreateJson("action", "unity-exit"));
+        OnMessageSend?.Invoke(WebSocketMessage.CreateJson("action", "unity-exited"));
         server.Stop();
     }
 
