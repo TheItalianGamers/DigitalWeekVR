@@ -7,17 +7,21 @@ using WebSocketSharp.Server;
 using System;
 using System.Collections.Concurrent;
 
-// public enum WebSocketEvent {
-//     // Receiving Events
-//     OnChangeScene = "change-scene",
-//     OnSetDifficultyLevel = "set-difficulty-level",
+[System.Serializable]
+public static class WebSocketEvent
+{
 
-//     // Sending Events
-//     OnUnityExited = "unity-exited"
+    // Sending Events
+    public static readonly string OnUnityExited = "unity-exited";
 
-//     // Sending/Receiving Events
-//     OnMessage = "message",
-// }
+    // Receiving Events
+    public static readonly string OnChangeScene = "change-scene";
+    public static readonly string OnSetDifficultyLevel = "set-difficulty-level";
+
+    // Sending/Receiving Events
+    public static readonly string OnMessage = "message";
+
+}
 
 [System.Serializable]
 public class WebSocketMessage
@@ -47,7 +51,7 @@ public class MyWebSocketBehavior : WebSocketBehavior
 
     protected override void OnOpen()
     {
-        WebSocketManager.Instance.OnMessageSend += WebSocketManager_OnMessageSend;
+        WebSocketManager.Instance.OnEmitToClient += WebSocketManager_OnEmitToClient; ;
     }
 
     protected override void OnMessage(MessageEventArgs e)
@@ -55,36 +59,31 @@ public class MyWebSocketBehavior : WebSocketBehavior
 
         WebSocketMessage messageObject = JsonUtility.FromJson<WebSocketMessage>(e.Data);
 
-        switch (messageObject.Event)
+        if (messageObject.Event == WebSocketEvent.OnMessage)
         {
-
-            case "message":
-                {
-                    Debug.Log(messageObject.Value);
-                    break;
-                }
-
-            case "set-difficulty-level":
-                {
-                    Debug.Log("Now I have to set the " + messageObject.Value + " mode!");
-                    break;
-                }
-
-            case "change-scene":
-                {
-                    OnSceneEvent?.Invoke(messageObject.Value);
-                    break;
-                }
-
-
+            Debug.Log(messageObject.Value);
+            WebSocketManager_OnEmitToClient(WebSocketEvent.OnMessage, "The server received the message correctly");
+            return;
         }
 
-        Send(WebSocketMessage.CreateJson("message", "Greetings from the server!!!"));
+        if (messageObject.Event == WebSocketEvent.OnChangeScene)
+        {
+            OnSceneEvent?.Invoke(messageObject.Value);
+            return;
+        }
+
+        if (messageObject.Event == WebSocketEvent.OnSetDifficultyLevel)
+        {
+            Debug.Log("Now I have to set the " + messageObject.Value + " mode!");
+            return;
+        }
+
     }
 
-    private void WebSocketManager_OnMessageSend(string jsonMessage)
+    private void WebSocketManager_OnEmitToClient(string e, string v)
     {
-        Send(jsonMessage);
+        string jsonString = WebSocketMessage.CreateJson(e, v);
+        Send(jsonString);
     }
 
 }
@@ -95,8 +94,8 @@ public class WebSocketManager : MonoBehaviour
     private WebSocketServer server;
     private readonly ConcurrentQueue<Action> _actions = new ConcurrentQueue<Action>();
 
-    public delegate void MessageSendDelegate(string jsonMessage);
-    public event MessageSendDelegate OnMessageSend;
+    public delegate void EmitDelegate(string Event, string Value);
+    public event EmitDelegate OnEmitToClient;
 
     public static WebSocketManager Instance;
 
@@ -149,7 +148,7 @@ public class WebSocketManager : MonoBehaviour
 
     void OnDestroy()
     {
-        OnMessageSend?.Invoke(WebSocketMessage.CreateJson("action", "unity-exited"));
+        OnEmitToClient?.Invoke(WebSocketEvent.OnUnityExited, "");
         server.Stop();
     }
 
@@ -159,9 +158,14 @@ public class WebSocketManager : MonoBehaviour
         _actions.Enqueue(() =>
         {
             if (sceneName != SceneManager.GetActiveScene().name)
+            {
                 SceneManager.LoadScene(sceneName);
+                OnEmitToClient?.Invoke(WebSocketEvent.OnMessage, "The scene has been changed correctly!");
+            }
             else
-                OnMessageSend?.Invoke(WebSocketMessage.CreateJson("message", $"The user is still in the {sceneName} !"));
+            {
+                OnEmitToClient?.Invoke(WebSocketEvent.OnMessage, $"The user is still in the {sceneName}!");
+            }
         });
 
     }
