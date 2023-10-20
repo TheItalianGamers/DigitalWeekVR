@@ -148,6 +148,7 @@ public class WebSocketManager : MonoBehaviour
 
     void OnDestroy()
     {
+        Instance = null;
         OnEmitToClient?.Invoke(WebSocketEvent.OnUnityExited, "");
         server.Stop();
     }
