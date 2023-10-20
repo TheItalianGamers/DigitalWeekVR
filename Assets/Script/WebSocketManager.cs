@@ -7,7 +7,7 @@ using WebSocketSharp.Server;
 using System;
 using System.Collections.Concurrent;
 
-[System.Serializable]
+[Serializable]
 public static class WebSocketEvent
 {
 
@@ -23,7 +23,7 @@ public static class WebSocketEvent
 
 }
 
-[System.Serializable]
+[Serializable]
 public class WebSocketMessage
 {
 
@@ -46,12 +46,18 @@ public class WebSocketMessage
 public class MyWebSocketBehavior : WebSocketBehavior
 {
 
+    // Delegates and Events:
     public delegate void SceneDelegate(string sceneName);
     public event SceneDelegate OnSceneEvent;
 
+    public delegate void DifficultyDelegate(string difficultyMode);
+    public event DifficultyDelegate OnSetDifficultyMode;
+
+    // -------------------------------------------
+
     protected override void OnOpen()
     {
-        WebSocketManager.Instance.OnEmitToClient += WebSocketManager_OnEmitToClient; ;
+        WebSocketManager.Instance.OnEmitToClient += WebSocketManager_OnEmitToClient;
     }
 
     protected override void OnMessage(MessageEventArgs e)
@@ -74,7 +80,7 @@ public class MyWebSocketBehavior : WebSocketBehavior
 
         if (messageObject.Event == WebSocketEvent.OnSetDifficultyLevel)
         {
-            Debug.Log("Now I have to set the " + messageObject.Value + " mode!");
+            OnSetDifficultyMode?.Invoke(messageObject.Value);
             return;
         }
 
@@ -99,6 +105,8 @@ public class WebSocketManager : MonoBehaviour
 
     public static WebSocketManager Instance;
 
+    private GlobalSettingsManager globalSettingsManager;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -108,6 +116,7 @@ public class WebSocketManager : MonoBehaviour
         }
 
         Instance = this;
+        globalSettingsManager = this.gameObject.GetComponent<GlobalSettingsManager>();
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -119,6 +128,7 @@ public class WebSocketManager : MonoBehaviour
         {
             s.OriginValidator = val => { return true; };
             s.OnSceneEvent += MyWebSocketBehavior_OnSceneEvent;
+            s.OnSetDifficultyMode += MyWebSocketBehavior_OnSetDifficultyMode;
         });
 
         server.Start();
@@ -169,6 +179,23 @@ public class WebSocketManager : MonoBehaviour
             }
         });
 
+    }
+
+    private void MyWebSocketBehavior_OnSetDifficultyMode(string difficultyMode)
+    {
+        // Dispatch into the Unity main thread's next Update routine
+        _actions.Enqueue(() =>
+        {
+            if (GlobalSettings.LevelOfDifficulty != difficultyMode)
+            {
+                globalSettingsManager.SetDifficultyMode(difficultyMode);
+                OnEmitToClient?.Invoke(WebSocketEvent.OnMessage, $"Now the mode is set to {GlobalSettings.LevelOfDifficulty}!");
+            }
+            else
+            {
+                OnEmitToClient?.Invoke(WebSocketEvent.OnMessage, $"The mode is still set to {difficultyMode}");
+            }
+        });
     }
 
 }

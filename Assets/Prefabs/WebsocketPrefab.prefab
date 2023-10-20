@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5514773896080351233}
   - component: {fileID: 7464508557657062095}
+  - component: {fileID: -421872049341587153}
   m_Layer: 0
   m_Name: WebsocketPrefab
   m_TagString: Untagged
@@ -42,5 +43,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbe3e354baa21224babd4ee36b671bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-421872049341587153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556808944344722264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c3ab6e0fb349a4c8c670afee410bad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
