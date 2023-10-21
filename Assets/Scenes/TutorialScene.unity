@@ -2568,7 +2568,7 @@ GameObject:
   - component: {fileID: 738571197}
   m_Layer: 0
   m_Name: Right Controller
-  m_TagString: Untagged
+  m_TagString: HardModeFeatures
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4564,7 +4564,7 @@ GameObject:
   - component: {fileID: 1079620525}
   m_Layer: 0
   m_Name: Left Controller
-  m_TagString: Untagged
+  m_TagString: HardModeFeatures
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4964,7 +4964,7 @@ GameObject:
   - component: {fileID: 1106414731}
   m_Layer: 0
   m_Name: Left Ray Teleportation
-  m_TagString: Untagged
+  m_TagString: HardModeFeatures
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6889,7 +6889,7 @@ GameObject:
   - component: {fileID: 1401989944}
   m_Layer: 0
   m_Name: Right Ray Grab Interactor
-  m_TagString: Untagged
+  m_TagString: HardModeFeatures
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7534,7 +7534,7 @@ GameObject:
   - component: {fileID: 1419908354}
   m_Layer: 0
   m_Name: Right Ray Teleportation
-  m_TagString: Untagged
+  m_TagString: HardModeFeatures
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9228,7 +9228,7 @@ GameObject:
   - component: {fileID: 1596777337}
   m_Layer: 0
   m_Name: Left Ray Grab Interactor
-  m_TagString: Untagged
+  m_TagString: HardModeFeatures
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11171,11 +11171,12 @@ GameObject:
   - component: {fileID: 1817718565}
   - component: {fileID: 1817718564}
   - component: {fileID: 1817718569}
+  - component: {fileID: 1817718571}
   - component: {fileID: 1817718562}
   - component: {fileID: 1817718561}
   - component: {fileID: 1817718566}
   - component: {fileID: 1817718567}
-  - component: {fileID: 1817718568}
+  - component: {fileID: 1817718570}
   m_Layer: 6
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -11411,22 +11412,6 @@ MonoBehaviour:
   rightTeleportation: {fileID: 1419908352}
   leftRay: {fileID: 1596777340}
   rightRay: {fileID: 1401989947}
---- !u!114 &1817718568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817718557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b195657aff75e49a91a326dd72196a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftGrabRay: {fileID: 1596777335}
-  rightGrabRay: {fileID: 1401989942}
-  leftDirectGrab: {fileID: 1079620526}
-  rightDirectGrab: {fileID: 738571198}
 --- !u!114 &1817718569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11464,6 +11449,60 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: Vector2
       m_Id: 0a31b44a-f80e-4dc9-9fa8-a7ee36b8a4b0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+--- !u!114 &1817718570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817718557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686b64acf2668074a84067e96c1eb768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftGrabRay: {fileID: 1596777335}
+  rightGrabRay: {fileID: 1401989942}
+  leftDirectGrab: {fileID: 1079620526}
+  rightDirectGrab: {fileID: 738571198}
+--- !u!114 &1817718571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817718557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2935ccb186a3f40458bfb8e9e6ffc5b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Movement
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: ee5ef123-bc37-490b-ac72-74580eba0d76
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  turnAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Turn
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 11bed6c5-62e2-448e-8780-5f32da25a44f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
