@@ -10,6 +10,13 @@ public class AdminMovements : MonoBehaviour {
 
 	Vector3 velocity; // current velocity
 
+	public static AdminMovements instance;
+
+	void Awake()
+	{
+		instance = this;
+	}
+	
 	static bool Focused {
 		get => Cursor.lockState == CursorLockMode.Locked;
 		set {
