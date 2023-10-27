@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class AdminManager : MonoBehaviour
 {
+    public GameObject simulatorXR;
+    
     private AdminUIManager adminUIManager;
     private AdminMovements adminMovements;
     
@@ -27,5 +29,10 @@ public class AdminManager : MonoBehaviour
     void UpdateInputs()
     {
         if(Input.GetKeyDown(KeyCode.Q)) adminUIManager.ToggleAdminUIButtons();
+    }
+
+    public void ToggleXRSimulator()
+    {
+        simulatorXR.SetActive(!simulatorXR.activeSelf);
     }
 }

@@ -8,6 +8,7 @@ public class AdminUIManager : MonoBehaviour
     public GameObject adminUIAdminPanel;
     
     private AdminMovements adminMovements;
+    private AdminManager adminManager;
     
     public static AdminUIManager instance;
 
@@ -19,6 +20,7 @@ public class AdminUIManager : MonoBehaviour
     void Start()
     {
         adminMovements = AdminMovements.instance;
+        adminManager = AdminManager.instance;
     }
     
     public void ToggleAdminUIButtons()
@@ -28,8 +30,13 @@ public class AdminUIManager : MonoBehaviour
         if(!adminUIButtons.activeSelf) adminUIAdminPanel.SetActive(false);
     }
     
-    public void toggleAdminUIAdminPanel()
+    public void OnClickToggleAdminUIAdminPanel()
     {
         adminUIAdminPanel.SetActive(!adminUIAdminPanel.activeSelf);
+    }
+    
+    public void OnClickToggleXRSimulator()
+    {
+        adminManager.ToggleXRSimulator();
     }
 }
