@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AdminManager : MonoBehaviour
 {
@@ -34,5 +35,10 @@ public class AdminManager : MonoBehaviour
     public void ToggleXRSimulator()
     {
         simulatorXR.SetActive(!simulatorXR.activeSelf);
+    }
+
+    public void ChangeScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }
