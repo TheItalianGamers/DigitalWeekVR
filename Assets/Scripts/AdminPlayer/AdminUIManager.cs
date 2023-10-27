@@ -33,6 +33,7 @@ public class AdminUIManager : MonoBehaviour
     public void OnClickToggleAdminUIAdminPanel()
     {
         adminUIAdminPanel.SetActive(!adminUIAdminPanel.activeSelf);
+        adminUIButtons.SetActive(!adminUIAdminPanel.activeSelf);
     }
     
     public void OnClickToggleXRSimulator()
