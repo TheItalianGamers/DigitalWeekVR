@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class AdminManager : MonoBehaviour
 {
     public GameObject simulatorXR;
+    public GameObject adminPlayerMesh;
+    public GameObject adminLaserPointer;
     
     private AdminUIManager adminUIManager;
     private AdminMovements adminMovements;
@@ -40,5 +42,11 @@ public class AdminManager : MonoBehaviour
     public void ChangeScene(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void ToggleAdminVisibility()
+    {
+        adminPlayerMesh.SetActive(!adminPlayerMesh.activeSelf);
+        adminLaserPointer.SetActive(!adminLaserPointer.activeSelf);
     }
 }

@@ -53,4 +53,9 @@ public class AdminUIManager : MonoBehaviour
     {
         adminManager.ChangeScene(scene);
     }
+    
+    public void OnClickToggleAdminVisibility()
+    {
+        adminManager.ToggleAdminVisibility();
+    }
 }
