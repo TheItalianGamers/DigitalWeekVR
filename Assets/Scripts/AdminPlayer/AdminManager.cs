@@ -7,10 +7,12 @@ public class AdminManager : MonoBehaviour
     public GameObject simulatorXR;
     public GameObject adminPlayerMesh;
     public GameObject adminLaserPointer;
+    public GameObject adminPlayer;
+    public GameObject player;
     
     private AdminUIManager adminUIManager;
     private AdminMovements adminMovements;
-    
+
     public static AdminManager instance;
 
     void Awake()
@@ -48,5 +50,15 @@ public class AdminManager : MonoBehaviour
     {
         adminPlayerMesh.SetActive(!adminPlayerMesh.activeSelf);
         adminLaserPointer.SetActive(!adminLaserPointer.activeSelf);
+    }
+
+    public void TeleportAdminToPlayer()
+    {
+        adminPlayer.transform.position = player.transform.position;
+    }
+    
+    public void TeleportPlayerToAdmin()
+    {
+        player.transform.position = adminPlayer.transform.position;
     }
 }

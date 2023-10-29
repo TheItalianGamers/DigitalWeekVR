@@ -27,9 +27,9 @@ public class AdminUIManager : MonoBehaviour
     public void ToggleAdminUIButtons()
     {
         adminUIButtons.SetActive(!adminUIButtons.activeSelf);
-        adminMovements.enabled = !adminMovements.enabled;
-        if(!adminUIButtons.activeSelf) adminUIAdminPanel.SetActive(false);
-        if(!adminUIButtons.activeSelf) adminUIAdminPanel.SetActive(false);
+        adminUIAdminPanel.SetActive(false);
+        adminUISceneChanger.SetActive(false);
+        adminMovements.enabled = !adminUIButtons.activeSelf;
     }
     
     public void OnClickToggleAdminUIAdminPanel()
@@ -57,5 +57,15 @@ public class AdminUIManager : MonoBehaviour
     public void OnClickToggleAdminVisibility()
     {
         adminManager.ToggleAdminVisibility();
+    }
+    
+    public void OnClickTeleportAdminToPlayer()
+    {
+        adminManager.TeleportAdminToPlayer();
+    }
+    
+    public void OnClickTeleportPlayerToAdmin()
+    {
+        adminManager.TeleportPlayerToAdmin();
     }
 }
