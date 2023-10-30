@@ -12,6 +12,8 @@ public class AdminManager : MonoBehaviour
     
     private AdminUIManager adminUIManager;
     private AdminMovements adminMovements;
+    
+    private string currentScene;
 
     public static AdminManager instance;
 
@@ -24,6 +26,7 @@ public class AdminManager : MonoBehaviour
     {
         adminUIManager = AdminUIManager.instance;
         adminMovements = AdminMovements.instance;
+        ChangeScene("TutorialScene");
     }
 
     void Update()
@@ -43,7 +46,11 @@ public class AdminManager : MonoBehaviour
 
     public void ChangeScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        if(currentScene != null)
+            SceneManager.UnloadSceneAsync(currentScene);
+        
+        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        currentScene = scene;
     }
 
     public void ToggleAdminVisibility()
