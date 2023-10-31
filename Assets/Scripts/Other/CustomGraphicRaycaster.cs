@@ -48,21 +48,22 @@ public class CustomGraphicRaycaster : GraphicRaycaster
         if (Display.activeEditorGameViewTarget != displayIndex)
             return;
 #else
-        eventPosition = eventData.position;
-        // find the touch 
-        var touches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
-        if (touches.Any())
-        {
-            var touch = touches.FirstOrDefault(t => t.screenPosition == eventData.position);
-            if (touch.valid)
-            {
-                var eventDisplayIndex = touch.displayIndex;
-                if (eventDisplayIndex != displayIndex)
-                    return;
-                eventPosition.z = eventDisplayIndex;
-            }
-        }
-        else if (Mouse.current != null)
+        // eventPosition = eventData.position;
+        // // find the touch 
+        // var touches = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches;
+        // if (touches.Any())
+        // {
+        //     var touch = touches.FirstOrDefault(t => t.screenPosition == eventData.position);
+        //     if (touch.valid)
+        //     {
+        //         var eventDisplayIndex = touch.displayIndex;
+        //         if (eventDisplayIndex != displayIndex)
+        //             return;
+        //         eventPosition.z = eventDisplayIndex;
+        //     }
+        // }
+        // else 
+        if (Mouse.current != null)
         {
             if (Mouse.current.displayIndex.ReadValue() != displayIndex)
                 return;
