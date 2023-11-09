@@ -15,8 +15,6 @@ public class AdminManager : MonoBehaviour
     private AdminMovements adminMovements;
     
     private string currentScene;
-    private const int adminCameraOn = 2;
-    private const int adminCameraOff = 0;
 
     public static AdminManager instance;
 
