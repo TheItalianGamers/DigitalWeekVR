@@ -2364,7 +2364,7 @@ MonoBehaviour:
   adminPlayerMesh: {fileID: 707883975}
   adminLaserPointer: {fileID: 240636503}
   adminPlayer: {fileID: 675410068}
-  adminCamera: {fileID: 913683344}
+  adminCamera: {fileID: 913683347}
   player: {fileID: 194511687}
 --- !u!1 &573825789
 GameObject:
