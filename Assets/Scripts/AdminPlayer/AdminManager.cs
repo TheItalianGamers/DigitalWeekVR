@@ -8,6 +8,7 @@ public class AdminManager : MonoBehaviour
     public GameObject adminPlayerMesh;
     public GameObject adminLaserPointer;
     public GameObject adminPlayer;
+    public Camera adminCamera;
     public GameObject player;
     
     private AdminUIManager adminUIManager;
@@ -68,4 +69,10 @@ public class AdminManager : MonoBehaviour
     {
         player.transform.position = adminPlayer.transform.position;
     }
+
+    public void ChangeCamera() 
+    {
+        adminCamera.enabled = !adminCamera.enabled; 
+    }
+
 }

@@ -68,4 +68,10 @@ public class AdminUIManager : MonoBehaviour
     {
         adminManager.TeleportPlayerToAdmin();
     }
+
+    public void OnClickChangeCamera() 
+    {
+        adminManager.ChangeCamera();
+    }
+
 }
