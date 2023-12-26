@@ -9,8 +9,10 @@ public class SpawnHere : MonoBehaviour
     void Awake() {
         XROrigin origin = FindObjectOfType<XROrigin>();
 
-        if(origin)
+        if(origin) {
             origin.gameObject.transform.position = spawnPoint.position;
+            origin.gameObject.transform.rotation = spawnPoint.rotation;
+        }
         else
             Debug.Log("XROrigin not found!");
 
