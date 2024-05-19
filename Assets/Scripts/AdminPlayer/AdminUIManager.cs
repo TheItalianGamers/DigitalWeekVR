@@ -74,4 +74,9 @@ public class AdminUIManager : MonoBehaviour
         adminManager.ChangeCamera();
     }
 
+    public void OnClickToggleInstructionsUI()
+    {
+        adminManager.ToggleInstructionsUI();
+    }
+
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +14,7 @@ public class AdminManager : MonoBehaviour
     private AdminMovements adminMovements;
     
     private string currentScene;
+    private GameObject currentInstructionsUI;
 
     public static AdminManager instance;
 
@@ -73,6 +73,16 @@ public class AdminManager : MonoBehaviour
     public void ChangeCamera() 
     {
         adminCamera.enabled = !adminCamera.enabled; 
+    }
+
+    // Da fixare mettendo la UI nella scena gameplay e cambiare dinamicamente il contenuto testuale ogni volta che si cambia la stanza
+    public void ToggleInstructionsUI()
+    {
+        if (currentInstructionsUI == null) {
+            currentInstructionsUI = GameObject.FindGameObjectWithTag("InstructionsUI");
+        }
+
+        currentInstructionsUI.SetActive(!currentInstructionsUI.activeSelf);
     }
 
 }
