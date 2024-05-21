@@ -2,26 +2,25 @@ using UnityEngine;
 
 public class SecurityCameraRayCast : MonoBehaviour
 {
-    void FixedUpdate()
+    public Transform startingPoint;
+    public Transform directionPoint;
+
+    public GameObject detectionArea;
+    private GameObject previousArea;
+
+    void Update()
     {
-        // Bit shift the index of the layer (8) to get a bit mask
-        int layerMask = 1 << 8;
-
-        // This would cast rays only against colliders in layer 8.
-        // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
-        layerMask = ~layerMask;
-
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(startingPoint.position, directionPoint.InverseTransformDirection(Vector3.back), out RaycastHit hit, 15f))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
+            if (previousArea != null) Destroy(previousArea);
+
+            Debug.DrawLine(startingPoint.position, hit.point, Color.red);
+            Debug.Log(hit.collider.name);
+
+            if(hit.collider.gameObject.name == "Floor")
+                previousArea = Instantiate(detectionArea, hit.point, Quaternion.identity);
+
         }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-            Debug.Log("Did not Hit");
-        }
+        
     }
 }

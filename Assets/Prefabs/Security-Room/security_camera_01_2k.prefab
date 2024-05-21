@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &539540350885396750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6256083919355149928}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6256083919355149928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539540350885396750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.153, z: 0.195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7679575734751899129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7861574161660234258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -185,7 +216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4af147fefb790f44199d86437f306a63,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6256083919355149928}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4af147fefb790f44199d86437f306a63,
         type: 3}
@@ -196,6 +231,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8781739383658397701}
   m_SourcePrefab: {fileID: 100100000, guid: 4af147fefb790f44199d86437f306a63, type: 3}
+--- !u!4 &3929293157032944216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6601796854545360970, guid: 4af147fefb790f44199d86437f306a63,
+    type: 3}
+  m_PrefabInstance: {fileID: 7861574161660234258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7050532404459009859 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4af147fefb790f44199d86437f306a63,
@@ -235,3 +276,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20beb30e0386aba468c62a0ea748fd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingPoint: {fileID: 6256083919355149928}
+  directionPoint: {fileID: 3929293157032944216}
+  detectionArea: {fileID: 1889578578845464050, guid: e10fbfc84be12b346993aea9f80c5cda,
+    type: 3}
+--- !u!4 &7679575734751899129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4af147fefb790f44199d86437f306a63,
+    type: 3}
+  m_PrefabInstance: {fileID: 7861574161660234258}
+  m_PrefabAsset: {fileID: 0}
