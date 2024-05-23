@@ -27,7 +27,7 @@ public class AdminManager : MonoBehaviour
     {
         adminUIManager = AdminUIManager.instance;
         adminMovements = AdminMovements.instance;
-        ChangeScene("TutorialScene");
+        ChangeScene("Post-Office");
     }
 
     void Update()

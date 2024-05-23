@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: TV-Screen-Mat
-    second: {fileID: 2100000, guid: 1721622984810f44d8ba67e16d170057, type: 2}
+    second: {fileID: 2100000, guid: 955c9b4a52ca3fc42ad98c0ca4514d83, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
