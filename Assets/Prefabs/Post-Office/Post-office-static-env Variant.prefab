@@ -69,7 +69,8 @@ PrefabInstance:
       value: Post-office-static-env Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8343248219658952724, guid: 0a2e3c711979f56418067a064ee05b70, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0a2e3c711979f56418067a064ee05b70,
