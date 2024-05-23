@@ -26,9 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Security-Room.unity
     guid: 915bf96fe3f5a534f8933dda8edeca7b
-  - enabled: 1
-    path: Assets/Scenes/Ampliamento.unity
-    guid: 726d906cf67969b499069c0dbfbdafff
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: feaf3f59a16ec45418ea274f2b17b217,
       type: 2}
